@@ -1,26 +1,51 @@
 spring:
   application:
-    name: gateway
+    name: GATEWAY
   cloud:
+    discovery:
+      enabled: true
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - PATCH
       routes:
-        - id: Ingredient
-          uri: http://localhost:8082
-          predicates:
-            - Path=/ingredients/**
         - id: Food
-          uri: http://localhost:8081
+          uri: lb://Food
           predicates:
             - Path=/foods/**
-    loadbalancer:
-      enabled: true
+        - id: Ingredient
+          uri: lb://Ingredient
+          predicates:
+            - Path=/ingredients/**
+        - id: Event
+          uri: lb://Event
+          predicates:
+            - Path=/Event/event/**
+        - id: Ticket
+          uri: lb://Ticket
+          predicates:
+            - Path=/Ticket/ticket/**
+        - id: Exercice
+          uri: lb://Exercice
+          predicates:
+            - Path=/exercice/**
+        - id: Programme
+          uri: lb://programme
+          predicates:
+            - Path=/programme/**
 
 server:
   port: 8093
 
-# Eureka registration
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
