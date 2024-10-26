@@ -1,4 +1,5 @@
-package tn.healthfit.gateway;
+package tn.esprit.awd.gateway;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

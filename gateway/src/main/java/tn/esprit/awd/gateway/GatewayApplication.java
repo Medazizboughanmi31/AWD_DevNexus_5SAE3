@@ -1,4 +1,4 @@
-package tn.healthfit.gateway;
+package tn.esprit.awd.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
