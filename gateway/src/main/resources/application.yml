@@ -41,6 +41,14 @@ spring:
           uri: lb://programme
           predicates:
             - Path=/programme/**
+        - id: Commentaire
+          uri: lb://COMMENTAIRE
+          predicates:
+            - Path=/api/comments/**
+        - id: Actuality
+          uri: lb://ACTUALITY
+          predicates:
+            - Path=/api/actualities/**
 
 server:
   port: 8093
