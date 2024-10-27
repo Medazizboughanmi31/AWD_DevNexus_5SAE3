@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  event:
+    build: ./Event
+    image: event
+    container_name: eventContainer
+    ports:
+      - "8099:8099"
+    depends_on:
+      - db-mysql
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/Event?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=@ziz3101
+  ticket:
+    build: ./Ticket
+    image: ticket
+    container_name: ticketContainer
+    ports:
+      - "8098:8098"
+    depends_on:
+      - db-mysql
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/Ticket?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=@ziz3101
+  exercice:
+    build: ./Exercice
+    image: exercice
+    container_name: exerciceContainer
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+  programme:
+    build: ./Programme
+    image: programme
+    container_name: programmeContainer
+    ports:
+      - "8089:8089"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+  db-mysql:
+    image: "mysql:8.0"
+    container_name: db-mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=@ziz3101
+  gateway:
+    build: ./gateway
+    image: gateway
+    container_name: gatewayContainer
+    ports:
+      - "8093:8093"
+    depends_on:
+      - eureka
+      - event
+      - ticket
+      - programme
+      - exercice
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+  eureka:
+    build: ./Eureka
+    image: eureka
+    container_name: eurekaContainer
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+
