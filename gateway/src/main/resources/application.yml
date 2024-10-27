@@ -21,43 +21,34 @@ spring:
           uri: lb://Food
           predicates:
             - Path=/foods/**
-
         - id: Ingredient
           uri: lb://Ingredient
           predicates:
             - Path=/ingredients/**
-
         - id: Event
           uri: lb://Event
           predicates:
             - Path=/Event/event/**
-
         - id: Ticket
           uri: lb://Ticket
           predicates:
             - Path=/Ticket/ticket/**
-
         - id: Exercice
           uri: lb://Exercice
           predicates:
             - Path=/exercice/**
-
         - id: Programme
           uri: lb://programme
           predicates:
             - Path=/programme/**
-
-
         - id: Commentaire
           uri: lb://COMMENTAIRE
           predicates:
             - Path=/api/comments/**
-
         - id: Actuality
           uri: lb://ACTUALITY
           predicates:
             - Path=/api/actualities/**
-
 
 server:
   port: 8093
