@@ -1,6 +1,7 @@
 package tn.healthfit.food;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,14 @@ public class FoodController {
         return foodService.createFood(food);
     }
 
+    @RequestMapping("/ingredients")
+    public List<Ingredient> getAllIngredients(){
+        return foodService.getAllIngredients();
+    }
+//    @RequestMapping("/ingredients/{id}")
+//    public Ingredient getIngredient(@PathVariable Long id){
+//        return foodService.getIngredient(id);
+//    }
     // Get a food item by ID
     @GetMapping("/{id}")
     public ResponseEntity<Food> getFoodById(@PathVariable Long id) {
@@ -49,5 +58,14 @@ public class FoodController {
     public ResponseEntity<Void> deleteFood(@PathVariable Long id) {
         foodService.deleteFood(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}/with-ingredients")
+    public ResponseEntity<FoodWithIngredientsDTO> getFoodWithIngredients(@PathVariable Long id) {
+        try {
+            FoodWithIngredientsDTO foodWithIngredientsDTO = foodService.getFoodWithIngredients(id);
+            return ResponseEntity.ok(foodWithIngredientsDTO);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }

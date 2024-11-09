@@ -2,7 +2,10 @@ package tn.healthfit.food;
 
 
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Food {
@@ -20,7 +23,7 @@ public class Food {
     private Double carbs;
     private String category; // e.g., Vegetarian, Non-Vegetarian, Vegan, etc.
     @ElementCollection
-    private List<String> ingredients;
+    private Set<Integer> ingredients = new HashSet<>();
 
     public Double getProteins() {
         return proteins;
@@ -101,11 +104,11 @@ public class Food {
         this.category = category;
     }
 
-    public List<String> getIngredients() {
+    public Set<Integer> getIngredients() {
         return ingredients;
     }
 
-    public void setIngrediens(List<String> ingredients) {
+    public void setIngredients(Set<Integer> ingredients) {
         this.ingredients = ingredients;
     }
 

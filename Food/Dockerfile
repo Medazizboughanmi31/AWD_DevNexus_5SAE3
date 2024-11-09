@@ -1,4 +1,4 @@
-# dockerfile for Food service
+# Dockerfile for Food service
 FROM openjdk:17
 EXPOSE 8083
 ADD target/Food-0.0.1-SNAPSHOT.jar food.jar

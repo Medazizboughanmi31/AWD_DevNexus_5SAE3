@@ -1,0 +1,25 @@
+2024-11-09 16:26:20.446783+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "'Lettuce' (FOOD_INGREDIENTS_COPY_3_0: ""INGREDIENTS"" INTEGER)"
+Data conversion error converting "'Lettuce' (FOOD_INGREDIENTS_COPY_3_0: ""INGREDIENTS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."FOOD_INGREDIENTS_COPY_3_0"("FOOD_ID", "INGREDIENTS") OVERRIDING SYSTEM VALUE SELECT "FOOD_ID", "INGREDIENTS" FROM "PUBLIC"."FOOD_INGREDIENTS" [22018-224]
+2024-11-09 16:31:24.859335+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Tomato"
+Data conversion error converting "Tomato" [22018-224]
+2024-11-09 16:32:51.997417+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Tomato"
+Data conversion error converting "Tomato" [22018-224]
+2024-11-09 16:36:01.113629+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Chicken Breast"
+Data conversion error converting "Chicken Breast" [22018-224]
+2024-11-09 16:37:42.220492+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Chicken Breast"
+Data conversion error converting "Chicken Breast" [22018-224]
+2024-11-09 16:39:03.746085+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Tofu"
+Data conversion error converting "Tofu" [22018-224]
+2024-11-09 16:39:09.814392+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Tofu"
+Data conversion error converting "Tofu" [22018-224]
+2024-11-09 16:39:49.109891+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Erreur lors de la conversion de données "Tofu"
+Data conversion error converting "Tofu" [22018-224]
