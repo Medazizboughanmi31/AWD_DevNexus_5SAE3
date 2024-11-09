@@ -38,11 +38,11 @@ spring:
           predicates:
             - Path=/exercice/**
         - id: Programme
-          uri: lb://programme
+          uri: lb://Programme
           predicates:
             - Path=/programme/**
         - id: Commentaire
-          uri: lb://COMMENTAIRE
+          uri: lb://Commentaire
           predicates:
             - Path=/api/comments/**
         - id: Actuality
