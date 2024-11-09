@@ -38,17 +38,24 @@ spring:
           predicates:
             - Path=/exercice/**
         - id: Programme
-          uri: lb://programme
+          uri: lb://Programme
           predicates:
             - Path=/programme/**
         - id: Commentaire
-          uri: lb://COMMENTAIRE
+          uri: lb://Commentaire
           predicates:
             - Path=/api/comments/**
         - id: Actuality
           uri: lb://ACTUALITY
           predicates:
             - Path=/api/actualities/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/AWD-Realm
+          jwk-set-uri: http://localhost:8080/realms/AWD-Realm/protocol/openid-connect/certs
 
 server:
   port: 8093
