@@ -16,14 +16,7 @@ const challengeSchema = new mongoose.Schema({
     },
     startDate: { type: Date, default: Date.now },
     endDate: { type: Date },
-    participants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    }],
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    },
+
     status: {
         type: String,
         enum: ['Active', 'Completed', 'Expired'],

@@ -1,12 +1,23 @@
-const { Challenge } = require('../models/challenge');
+const Challenge = require('../models/challenge');
 
 class ChallengeService {
     // Create a new challenge
     static async createChallenge(challengeData) {
+        const { name, description, goal, startDate, endDate } = challengeData;
         try {
-            const challenge = new Challenge(challengeData);
-            return await challenge.save();
+
+            const newChallenge = new Challenge({
+                name,
+                description,
+                goal,
+                startDate: startDate || new Date(),  //
+                endDate,
+                status: 'Active',
+            });
+            const challenge = await newChallenge.save();
+            return challenge;
         } catch (err) {
+
             throw new Error('Error creating challenge: ' + err.message);
         }
     }
@@ -14,16 +25,17 @@ class ChallengeService {
     // Get all challenges
     static async getAllChallenges() {
         try {
-            return await Challenge.find().populate('participants', 'name email');
+            return await Challenge.find();  // Removed the populate part
         } catch (err) {
             throw new Error('Error retrieving challenges: ' + err.message);
         }
     }
 
+
     // Get challenge by ID
     static async getChallengeById(challengeId) {
         try {
-            return await Challenge.findById(challengeId).populate('participants', 'name email');
+            return await Challenge.findById(challengeId);
         } catch (err) {
             throw new Error('Error retrieving challenge: ' + err.message);
         }

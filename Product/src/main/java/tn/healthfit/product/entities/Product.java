@@ -29,6 +29,7 @@ public class Product implements Serializable {
 
     private String publishedBy;
     private Date datePublished;
+
     private boolean available = true; // Remains true until order is completed
 
     public void markAsUnavailable() {

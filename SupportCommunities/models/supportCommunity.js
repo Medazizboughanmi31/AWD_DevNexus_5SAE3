@@ -14,17 +14,9 @@ const supportCommunitySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
-    }],
     challenges: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Challenge',
-    }],
-    members: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to users that are part of the community
     }],
     createdAt: { type: Date, default: Date.now },
 });
