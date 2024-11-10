@@ -50,6 +50,16 @@ spring:
           predicates:
             - Path=/api/actualities/**
 
+        - id: Product
+          uri: lb://Product
+          predicates:
+            - Path=/product/**
+        - id: Cart
+          uri: lb://Cart
+          predicates:
+            - Path=/cart/**
+
+
   security:
     oauth2:
       resourceserver:
