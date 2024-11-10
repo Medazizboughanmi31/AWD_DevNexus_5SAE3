@@ -133,6 +133,10 @@ services:
       - "8009:8009"
     depends_on:
       - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - my-network
   db-mysql:
     image: "mysql:8.0"
     container_name: db-mysql
