@@ -6,6 +6,8 @@ import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +24,17 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userId; // Keycloak user ID
+
+    @ElementCollection
+    private Set<Long> CartProducts = new HashSet<>();
+
+    public Set<Long> getCartProducts() {
+        return CartProducts;
+    }
+
+    public void setCartProducts(Set<Long> cartProducts) {
+        CartProducts = cartProducts;
+    }
 
     public Long getId() {
         return id;
