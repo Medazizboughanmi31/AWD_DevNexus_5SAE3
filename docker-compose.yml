@@ -113,6 +113,26 @@ services:
       - SPRING_DATASOURCE_PASSWORD=@ziz3101
     networks:
       - my-network
+  product:
+    build: ./Product
+    image: product
+    container_name: productContainer
+    ports:
+      - "8008:8008"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - my-network
+  cart:
+    build: ./Cart
+    image: cart
+    container_name: cartContainer
+    ports:
+      - "8009:8009"
+    depends_on:
+      - eureka
   db-mysql:
     image: "mysql:8.0"
     container_name: db-mysql
@@ -141,6 +161,8 @@ services:
       - commentaire
       - food
       - ingredient
+      - product
+      - cart
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     networks:
