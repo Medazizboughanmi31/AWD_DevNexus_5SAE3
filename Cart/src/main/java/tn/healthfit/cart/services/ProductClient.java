@@ -16,3 +16,4 @@ public interface ProductClient {
     @RequestMapping("product/retrieve-Product/{idProduct}")
     public Produit retrieveProduct(@PathVariable("idProduct") long id);
 }
+
