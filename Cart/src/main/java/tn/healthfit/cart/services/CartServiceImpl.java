@@ -37,7 +37,7 @@ public class CartServiceImpl implements ICartService{
                 .collect(Collectors.toList());
     }
 
-    // Method to save a favorite product in the cart
+    // Method to save product in the cart
     public void saveCartProduct(long cartId, long produitId) {
         Cart cart = cartRepository.findById(cartId).get();
         cart.getCartProducts().add(produitId);

@@ -6,6 +6,8 @@ import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,6 +31,7 @@ public class Event implements Serializable {
     String place ;
     String description ;
     int nbMaxParticipants ;
-
+    @ElementCollection
+    private Set<Integer> EventTickets = new HashSet<>();
 
 }
