@@ -10,11 +10,14 @@ services:
     depends_on:
       - db-mysql
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/Event?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=@ziz3101
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   ticket:
@@ -26,11 +29,14 @@ services:
     depends_on:
       - db-mysql
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/Ticket?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=@ziz3101
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   exercice:
@@ -41,8 +47,11 @@ services:
       - "8088:8088"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   programme:
@@ -53,8 +62,11 @@ services:
       - "8089:8089"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   food:
@@ -65,8 +77,11 @@ services:
       - "8081:8081"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   ingredient:
@@ -77,8 +92,11 @@ services:
       - "8082:8082"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   actuality:
@@ -90,11 +108,14 @@ services:
     depends_on:
       - db-mysql
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/Actuality?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=@ziz3101
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   commentaire:
@@ -106,11 +127,14 @@ services:
     depends_on:
       - db-mysql
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/Commentaire?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=@ziz3101
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   product:
@@ -121,8 +145,11 @@ services:
       - "8008:8008"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   cart:
@@ -133,8 +160,11 @@ services:
       - "8009:8009"
     depends_on:
       - eureka
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   db-mysql:
@@ -168,10 +198,13 @@ services:
       - product
       - cart
       - keycloak
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
       - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://keycloak:8080/realms/healthfit
       - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://keycloak:8080/realms/healthfit/protocol/openid-connect/certs
+      - spring.cloud.config.uri=http://config-server:8888
+      - spring.config.import=optional:configserver:http://config-server:8888/
     networks:
       - my-network
   eureka:
@@ -182,6 +215,18 @@ services:
       - "8761:8761"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://localhost:8761/eureka/
+    networks:
+      - my-network
+  config-server:
+    build: ./ConfigServer
+    image: configserver
+    container_name: configserverContainer
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     networks:
       - my-network
   keycloak:
