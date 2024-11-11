@@ -8,7 +8,7 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
+            allowedOrigins: "*"
             allowedHeaders: "*"
             allowedMethods:
               - GET
@@ -58,14 +58,12 @@ spring:
           uri: lb://Cart
           predicates:
             - Path=/cart/**
-
-
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/AWD-Realm
-          jwk-set-uri: http://localhost:8080/realms/AWD-Realm/protocol/openid-connect/certs
+          issuer-uri: http://keycloak:8080/realms/AWD
+          jwk-set-uri: http://keycloak:8080/realms/AWD/protocol/openid-connect/certs
 
 server:
   port: 8093
